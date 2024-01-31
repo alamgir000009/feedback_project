@@ -1,6 +1,5 @@
 <template>
     <Header />
-
     <div class="container mt-3">
         <div class="col-md-10 mx-auto">
             <div class="card shadow-lg">
@@ -9,16 +8,20 @@
                     <div class="row">
                         <div class="col-md-6" v-if="feedbacks.length > 0" v-for="(feedback, index) in feedbacks" :key="index">
                             <div class="card mb-4">
-                                <div class="card-body d-flex">
-                                    <div class="user-info mr-3">
-                                        <img :src="feedback.user.image" class="rounded-circle" alt="User Profile Image" width="50" height="50">
-                                        <p class="mt-2">{{ feedback.user.name }}</p>
-                                        <router-link :to="'feedback-details/'+feedback.id" class="btn btn-primary">
-                                            View Details
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <img :src="feedback.user.image" class="rounded-circle" style="object-fit:cover" alt="User Profile Image" width="50" height="50">
+                                            <p class="mt-2">{{ feedback.user.name }}</p>
+                                        </div>
+                                        <div>
+                                            <router-link :to="'feedback-details/'+feedback.id" class="btn btn-primary">
+                                            View Details/Comments
                                         </router-link>
+                                        </div>
                                     </div>
-                                    <div class="feedback-details flex-grow-1">
-                                        <p v-html="feedback.description"></p>
+                                    <div class="feedback-details">
+                                        <div v-html="feedback.description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -84,3 +87,10 @@ export default {
     },
 };
 </script>
+
+<style>
+.feedback-details {
+    max-height: 200px !important;
+    overflow-y: auto;
+}
+</style>

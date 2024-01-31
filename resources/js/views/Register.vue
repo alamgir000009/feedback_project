@@ -1,16 +1,16 @@
 <template>
     <Header />
-    <div class="container mt-4">
-        <div class="col-md-8 mx-auto">
+    <div class="container mt-5">
+        <div class="col-md-6 mx-auto">
             <div class="card bg-white">
                 <div class="card-heading">
-                    <h3 class="card-title">
-                        Please sign up <small>It's free!</small>
-                    </h3>
+                    <h3 class="text-center bg-dark text-white py-3">Register</h3>
                 </div>
                 <div class="card-body">
+                    <Error :errors="errors" />
                     <form @submit.prevent="register()">
                         <div class="form-group mt-3">
+                            <label for="" class="form-label">Name</label>
                             <input
                                 type="text"
                                 class="form-control input-sm"
@@ -19,11 +19,32 @@
                             />
                         </div>
                         <div class="form-group mt-3">
+                            <label for="" class="form-label">Username</label>
+                            <input
+                                type="text"
+                                class="form-control input-sm"
+                                placeholder="Enter Unique Username"
+                                v-model="formData.username"
+                            />
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="" class="form-label">Email</label>
                             <input
                                 type="email"
                                 class="form-control input-sm"
                                 placeholder="Email Address"
                                 v-model="formData.email"
+                            />
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="" class="form-label"
+                                >Select Image (Optional)</label
+                            >
+                            <input
+                                type="file"
+                                class="form-control input-sm"
+                                placeholder="Email Address"
+                                @change="imageSelected($event)"
                             />
                         </div>
                         <div class="form-group mt-3">
@@ -44,7 +65,7 @@
                         </div>
                         <button
                             type="submit"
-                            class="btn mt-3 btn-info btn-block"
+                            class="btn mt-3 btn-success w-100"
                         >
                             Register
                         </button>
@@ -56,43 +77,55 @@
 </template>
 <script>
 import Header from "../components/Header.vue";
+import Error from "../components/Error.vue";
 export default {
     name: "Register",
     data() {
         return {
             formData: {
                 name: "",
+                username:"",
                 email: "",
                 passowrd: "",
                 password_confirmation: "",
             },
+            image: "",
+            errors: "",
         };
     },
     components: {
         Header,
+        Error,
     },
     methods: {
-        async register() 
-        {
+        imageSelected(event) {
+            this.image = event.target.files[0];
+        },
+        async register() {
+            this.errors = "";
+            const data = new FormData();
+            if (this.image) {
+                data.append("image", this.image);
+            }
+            data.append("name", this.formData.name);
+            data.append("username", this.formData.username);
+            data.append("email", this.formData.email);
+            data.append("password", this.formData.password);
+            data.append(
+                "password_confirmation",
+                this.formData.password_confirmation
+            );
             await this.axios
-                .post("register", this.formData)
+                .post("register", data)
                 .then((response) => {
-                    this.$moshaToast(
-                        { title: "Registered successfully" },
-                        {
-                            type: "success",
-                            showIcon: true,
-                            hideProgressBar: true,
-                        }
-                    );
                     localStorage.setItem(
                         "auth_sanctum_token",
                         response.data.data.token
                     );
-                    this.$router.push("/home");
+                    this.$router.push("/feedback-form");
                 })
                 .catch((errors) => {
-                    this.$showFlattenedErrorsInMoshaToast(errors);
+                    this.errors = this.$laravelErrors(errors);
                 });
         },
     },

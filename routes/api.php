@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function() {
 
-    Route::apiResource('feedback',FeedbackController::class)->only(['index','store']);
+    Route::apiResource('feedback',FeedbackController::class)->except(['edit','update']);
     Route::post('feedback-comment',[FeedbackController::class, 'feedbackComment']);
     
     Route::get('category',[FeedbackController::class, 'fetchCategories']);

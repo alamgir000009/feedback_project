@@ -16,7 +16,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
+        <li v-if="!isLoggedIn" class="nav-item">
           <router-link class="nav-link" to="/register">Register</router-link>
         </li>
         <li v-if="!isLoggedIn" class="nav-item">

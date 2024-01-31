@@ -24,7 +24,7 @@ class FeedbackController extends Controller
         $validator = Validator::make($request->all(), [
             "category" => "required|string|min:5",
             "title" => "required|string",
-            "description" => "required|string|min:20",
+            "description" => "required|string|min:10",
         ]);
 
         if ($validator->fails()) {
@@ -52,6 +52,12 @@ class FeedbackController extends Controller
         ]);
 
         return responseWithSuccess("Comment is added Successfully");
+    }
+
+    public function show($id)
+    {
+        $feedback = Feedback::with(['user:id,name,image','comments','comments.user'])->find($id);
+        return responseWithSuccess("Feedback is fetched Successfully",$feedback);
     }
 
     public function fetchCategories()

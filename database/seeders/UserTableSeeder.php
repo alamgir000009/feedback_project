@@ -15,6 +15,7 @@ class UserTableSeeder extends Seeder
         // creating admin
         User::create([
             "name" => "admin",
+            "username" => "admin",
             "email" => "admin@gmail.com",
             "role" => \Role::Admin,
             "password" => "12345678",
@@ -23,22 +24,27 @@ class UserTableSeeder extends Seeder
         $users = [
             [
                 'name' => 'User One',
+                'username' => 'UserOne',
                 'email' => 'userone@example.com',
             ],
             [
                 'name' => 'User Two',
+                'username' => 'UserTwo',
                 'email' => 'usertwo@example.com',
             ],
             [
                 'name' => 'User Three',
+                'username' => 'UserThree',
                 'email' => 'userthree@example.com',
             ],
             [
                 'name' => 'User Four',
+                'username' => 'UserFour',
                 'email' => 'userfour@example.com',
             ],
             [
                 'name' => 'User Five',
+                'username' => 'UserFive',
                 'email' => 'userfive@example.com',
             ],
         ];
@@ -52,6 +58,7 @@ class UserTableSeeder extends Seeder
         foreach ($users as $user) {
             User::create([
                 "name" => $user['name'],
+                "username" => $user['username'],
                 "email" => $user['email'],
                 "password" => "12345678",
             ]);

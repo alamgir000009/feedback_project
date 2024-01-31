@@ -21,4 +21,29 @@ class Comment extends Model
     public function feedback() {
         return $this->belongsTo(Feedback::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($comment) {
+            
+            $mentionedUsers = $comment->mentioned_users;
+
+            $users = User::select('id','email')->whereIn("username", $mentionedUsers)->get();
+
+            foreach ($users as $user) {
+                // Here we can send an email/notifications to notify the user.
+            }
+        });
+    }
+
+    public function getMentionedUsersAttribute()
+    {
+        $pattern = "/\@(\w+)/";
+        preg_match_all($pattern, $this->attributes['comment'], $matches);
+
+        return collect($matches[1])->unique();
+    }
+
 }

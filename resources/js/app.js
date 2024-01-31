@@ -3,10 +3,14 @@ import App from './App.vue';
 import router from './router';
 import axios from 'axios'
 import moment from 'moment';
-import VueAxios from 'vue-axios'
+import VueAxios from 'vue-axios';
+import FloatingVue from 'floating-vue';
+import 'floating-vue/dist/style.css';
+
 
 const app = createApp(App);
 
+app.use(FloatingVue)
 app.use(router);
 app.use(VueAxios, axios);
 

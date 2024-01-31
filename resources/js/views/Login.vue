@@ -3,13 +3,14 @@
     <div class="container mt-4">
         <div class="col-md-8 mx-auto">
             <div class="card bg-white">
-                <div class="card-heading">
-                    <h3 class="card-title">Login</h3>
+                <div class="card-header bg-dark text-white text-center">
+                    <h3>Login</h3>
                 </div>
                 <div class="card-body">
                     <Error :errors="errors"></Error>
                     <form @submit.prevent="login()">
                         <div class="form-group mt-3">
+                        <label class="form-label">Enter your email</label>
                             <input
                                 type="email"
                                 class="form-control input-sm"
@@ -18,6 +19,7 @@
                             />
                         </div>
                         <div class="form-group mt-3">
+                        <label class="form-label">Enter your password</label>
                             <input
                                 type="password"
                                 class="form-control input-sm"
@@ -27,7 +29,7 @@
                         </div>
                         <button
                             type="submit"
-                            class="btn mt-3 btn-info btn-block"
+                            class="btn mt-3 btn-success w-100"
                         >
                             Login
                         </button>
@@ -66,7 +68,7 @@ export default {
                         response.data.data.token
                     );
                     if (response.data.data.user.role == "User") {
-                        this.$router.push("/home");
+                        this.$router.push("/feedback-form");
                     } else {
                         this.$router.push("/dashboard");
                     }

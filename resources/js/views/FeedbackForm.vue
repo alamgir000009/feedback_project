@@ -2,7 +2,7 @@
     <Header />
     <div class="container mt-3">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 mx-auto">
                 <div class="card shadow-lg">
                     <div class="card-header bg-dark text-white">Give Feedback</div>
                     <div class="card-body">
@@ -21,7 +21,7 @@
                                 </select>
                             </div>
                             <div class="form-group mt-3">
-                                <label for="" class="form-label">Titl</label>
+                                <label for="" class="form-label">Enter Title</label>
                                 <input
                                     type="text"
                                     class="form-control input-sm"
@@ -31,7 +31,7 @@
                             </div>
                             <div class="form-group mt-3">
                                 <label for="" class="form-label"
-                                    >Description</label
+                                    >Give Description</label
                                 >
                                 <textarea
                                     class="form-control input-sm"
@@ -42,9 +42,9 @@
 
                             <button
                                 type="submit"
-                                class="btn mt-3 btn-info btn-block"
+                                class="btn mt-3 btn-success w-100"
                             >
-                                Register
+                                Save
                             </button>
                         </form>
                     </div>

@@ -19,12 +19,6 @@ const router = createRouter({
             name: 'Login', meta: { auth_required: false } 
         },
         { 
-            path: '/home',
-            component: () => import('../views/Home.vue'),
-            name: 'Home',
-            meta: { auth_required: true } 
-        },
-        { 
             path: '/feedback-form',
             component: () => import('../views/FeedbackForm.vue'),
             name: 'FeedbackForm',
@@ -53,11 +47,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const isLoggedIn = localStorage.getItem('auth_sanctum_token') !== null;
 
-    console.log(to.name)
-
     // If user is already logged in and trying to access login or register, redirect to home
     if (isLoggedIn && (to.name === 'Login' || to.name === 'Register')) {
-        next('/home');
+        next('/feedback-form');
     } else if (to.meta.auth_required && !isLoggedIn) {
         // If authentication is required and user is not logged in, redirect to login
         next('/login');
