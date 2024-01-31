@@ -81,6 +81,7 @@ export default {
             await this.axios
                 .post("feedback", this.formData)
                 .then((response) => {
+                    alert("Feedback sent successfully")
                     this.formData = {
                         category: "",
                         title: "",

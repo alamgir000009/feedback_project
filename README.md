@@ -5,6 +5,6 @@
 <h2>configure database connection in .env file</h2>
 <h2>php artisan key:generate</h2>
 <h2>php artisan storage:link</h2>
-<h2>npm install</h2>
+<h2>npm install --force</h2>
 <h2>php artisan migrate:fresh --seed</h2>
 <h2>npm run dev</h2>
